@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special coin flip</title>
+    <title>Special Coin Flip</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,7 +21,39 @@
     <div id="result">The decision is for you to make.</div>
 
     <script>
+        // Array of funny messages
+        const messages = [
+            "That was a flip, but was it a decision?",
+            "The coin speaks, but it says nothing!",
+            "It landed somewhere... in the realm of randomness!",
+            "Well, that was absolutely inconclusive.",
+            "You might want to ask the coin again.",
+            "The coin has spoken... but its words are nonsensical.",
+            "Your future is still uncertain. Sorry!",
+            "Coin flips: Where logic goes to die.",
+            "That was a flip, but was it a decision?",
+            "We consulted the coin, and it’s confused too.",
+            "You’re still the one who has to deal with this!",
+            "I hope you didn't expect clarity from this.",
+            "Just like life—flip, flip, and more flip!",
+            "It’s a flip... with no consequences."
+        ];
+
+        function playButtonSound() {
+            audio = new Audio('audio/click.mp3');
+            
+            const buttonSound = document.getElementById('button-sound');
+            audio.play();
+        }
+
+        function playFlipSound() {
+            audio = new Audio('audio/drumrolll.mp3');
+            const flipSound = document.getElementById('flip-sound');
+            audio.play();
+        }
+
         function startGradualFlip() {
+            playButtonSound();
             // Check if user entered a question
             const question = document.getElementById('question-box').value.trim();
             if (!question) {
@@ -43,6 +75,8 @@
             coinContainer.style.transform = "scale(1)";
 
             function graduallyStop() {
+                playFlipSound();
+
                 // Rotate the coin by 180 degrees each time
                 angle += 180;
                 coin.style.transform = `rotateY(${angle}deg)`;
@@ -61,11 +95,16 @@
                         coinContainer.style.opacity = "0";
                         coinContainer.style.transform = "scale(0.3)"; // Shrinks the coin
                         resultText.style.opacity = "1";
+
+                        // Select a random message from the list
+                        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                        resultText.textContent = randomMessage; // Display the random message
                     }, 500); // Start fading after half a second
                 }
             }
 
             // Start the gradual flip
+            playFlipSound();
             graduallyStop();
         }
     </script>

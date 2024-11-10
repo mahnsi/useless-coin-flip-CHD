@@ -4,11 +4,19 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    font-family: Tahoma, Verdana, sans-serif;
-    background: linear-gradient(to bottom, #c3d9ff, #8ba4e5);
+    font-family: Arial, sans-serif;
+    background: linear-gradient(45deg, #FF1493, #00FFFF, #FF4500, #FFFF00);
+    background-size: 400% 400%;
+    animation: gradient-animation 10s ease infinite;
     color: #333;
-    text-align: center;
 }
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 
 h1 {
     color: #003366;
@@ -16,15 +24,7 @@ h1 {
     text-shadow: 1px 1px 2px #fff;
     margin-bottom: 20px;
 }
-#question-box {
-    margin-bottom: 20px;
-    padding: 8px;
-    border: 2px solid #003366;
-    border-radius: 4px;
-    box-shadow: inset 1px 1px 3px #999;
-    font-size: 14px;
-    width: 250px;
-}
+
 #coin-container {
 width: 100px;
 height: 100px;
@@ -79,15 +79,45 @@ transition: opacity 3s ease, transform 3s ease; /* Fade-in and flip effect */
     text-shadow: 1px 1px 1px #fff;
 }
 
-/* textbox */
-input[type=text] {
-width: 50%;
-padding: 12px 20px;
-margin: 8px 0;
-box-sizing: border-box;
-border: 2px solid #ccc;
-border-radius: 4px;
+#question-box {
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 5px solid #FF1493;
+    background-color: #00FFFF;
+    color: #FF4500;
+    box-shadow: 0 0 15px 5px rgba(255, 69, 0, 0.8), 0 0 25px rgba(0, 255, 255, 0.8);
+    text-align: center;
+    text-transform: uppercase;
+    outline: none;
+    animation: neon-glow 1.5s ease-in-out infinite alternate;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    transition: all 0.3s ease;
 }
+
+#question-box:focus {
+    border: 5px solid #FFFF00;
+    background-color: #FF4500;
+    color: #FFFF00;
+    box-shadow: 0 0 20px 10px rgba(255, 255, 0, 0.8), 0 0 35px rgba(255, 69, 0, 0.8);
+    transform: scale(1.1);
+}
+
+/* Neon glow animation */
+@keyframes neon-glow {
+    0% {
+        text-shadow: 0 0 10px #FFFF00, 0 0 20px #FFFF00, 0 0 30px #FF1493, 0 0 40px #FF1493;
+    }
+    50% {
+        text-shadow: 0 0 15px #FF1493, 0 0 25px #FF1493, 0 0 35px #FFFF00, 0 0 45px #FFFF00;
+    }
+    100% {
+        text-shadow: 0 0 20px #FFFF00, 0 0 30px #FFFF00, 0 0 40px #FF1493, 0 0 50px #FF1493;
+    }
+}
+
 
 /* button */
 button {
