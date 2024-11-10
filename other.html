@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special coin flip</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Ask a Question and Flip the Coin!</h1>
+    <input type="text" id="question-box" placeholder="Type your question here..." />
+    <button onclick="startGradualFlip()">Flip Coin</button>
+
+    <div id="coin-container">
+        <div id="coin">
+            <div class="face heads">Heads</div>
+            <div class="face tails">Tails</div>
+        </div>
+    </div>
+
+    <div id="result">The decision is for you to make.</div>
+
+    <script>
+        function startGradualFlip() {
+            // Check if user entered a question
+            const question = document.getElementById('question-box').value.trim();
+            if (!question) {
+                alert("Please type a question first!");
+                return;
+            }
+
+            const coin = document.getElementById('coin');
+            const coinContainer = document.getElementById('coin-container');
+            const resultText = document.getElementById('result');
+            let angle = 0;
+            let intervalTime = 100; // Starting interval time for animation
+            const intervalIncrease = 50; // Amount by which the interval time will increase
+            const maxInterval = 1000; // Maximum interval time before stopping
+
+            // Clear any previous styles and reset visibility
+            resultText.style.opacity = "0";
+            coinContainer.style.opacity = "1";
+            coinContainer.style.transform = "scale(1)";
+
+            function graduallyStop() {
+                // Rotate the coin by 180 degrees each time
+                angle += 180;
+                coin.style.transform = `rotateY(${angle}deg)`;
+
+                // Increase the interval time to slow down the flipping effect
+                intervalTime += intervalIncrease;
+
+                if (intervalTime < maxInterval) {
+                    setTimeout(graduallyStop, intervalTime);
+                } else {
+                    // Stop halfway between heads and tails
+                    coin.style.transform = `rotateY(${angle + 90}deg)`;
+
+                    // Dramatic fade-out and shrink effect after a delay
+                    setTimeout(() => {
+                        coinContainer.style.opacity = "0";
+                        coinContainer.style.transform = "scale(0.3)"; // Shrinks the coin
+                        resultText.style.opacity = "1";
+                    }, 500); // Start fading after half a second
+                }
+            }
+
+            // Start the gradual flip
+            graduallyStop();
+        }
+    </script>
+</body>
+</html>
