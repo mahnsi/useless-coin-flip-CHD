@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="win95-popup">
+        <div class="title-bar">
+            <span>Error</span>
+            <button onclick="closePopup()">X</button>
+        </div>
+        <div class="content">
+            <p>Coin.exe has stopped responding. Please try again...</p>
+        </div>
+    </div>
+
     <h1>Ask a Question and Flip the Coin!</h1>
     <input type="text" id="question-box" placeholder="Type your question here..." />
     <button onclick="startGradualFlip()">Flip Coin</button>
@@ -19,15 +29,38 @@
     </div>
 
     <div id="result">The decision is for you to make.</div>
+    <img id="bug" src="img/cursor.png" alt="Cursor">
 
     <script>
+        window.onload = function() {
+            document.getElementById("win95-popup").style.display = "block";
+        };
+
+        // Function to close the popup
+        function closePopup() {
+            playButtonSound();
+            document.getElementById("win95-popup").style.display = "none";
+        }
+
+        function moveBug() {
+            const bug = document.getElementById("bug");
+
+            setInterval(() => {
+                const randomX = Math.floor(Math.random() * window.innerWidth);
+                const randomY = Math.floor(Math.random() * window.innerHeight);
+
+                bug.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            }, 2000); // Change position every 2 seconds
+        }
+
+        moveBug();
+
         // Array of funny messages
         const messages = [
             "That was a flip, but was it a decision?",
             "The coin speaks, but it says nothing!",
-            "It landed somewhere... in the realm of randomness!",
+            "It landed... somewhere... ",
             "Well, that was absolutely inconclusive.",
-            "You might want to ask the coin again.",
             "The coin has spoken... but its words are nonsensical.",
             "Your future is still uncertain. Sorry!",
             "Coin flips: Where logic goes to die.",
@@ -69,7 +102,7 @@
             const intervalIncrease = 50; // Amount by which the interval time will increase
             const maxInterval = 1000; // Maximum interval time before stopping
 
-            // Clear any previous styles and reset visibility
+            // reset styles
             resultText.style.opacity = "0";
             coinContainer.style.opacity = "1";
             coinContainer.style.transform = "scale(1)";
@@ -77,7 +110,7 @@
             function graduallyStop() {
                 playFlipSound();
 
-                // Rotate the coin by 180 degrees each time
+                // rotate coin by 180 degrees each time
                 angle += 180;
                 coin.style.transform = `rotateY(${angle}deg)`;
 
@@ -87,23 +120,23 @@
                 if (intervalTime < maxInterval) {
                     setTimeout(graduallyStop, intervalTime);
                 } else {
-                    // Stop halfway between heads and tails
+                    // stop halfway between heads and tails
                     coin.style.transform = `rotateY(${angle + 90}deg)`;
 
-                    // Dramatic fade-out and shrink effect after a delay
+                    // fade-out and shrink effect after a delay
                     setTimeout(() => {
                         coinContainer.style.opacity = "0";
-                        coinContainer.style.transform = "scale(0.3)"; // Shrinks the coin
+                        coinContainer.style.transform = "scale(0.3)"; // shrink effect
                         resultText.style.opacity = "1";
 
-                        // Select a random message from the list
+                        // random message 
                         const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-                        resultText.textContent = randomMessage; // Display the random message
-                    }, 500); // Start fading after half a second
+                        resultText.textContent = randomMessage; 
+                    }, 500); //  half a second
                 }
             }
 
-            // Start the gradual flip
+            // Start the flip
             playFlipSound();
             graduallyStop();
         }

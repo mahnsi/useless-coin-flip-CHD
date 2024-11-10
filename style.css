@@ -137,3 +137,69 @@ button:hover {
     background: linear-gradient(to bottom, #5aa0e3, #3b6091);
     box-shadow: 1px 1px 2px #333, inset -1px -1px 2px #fff;
 }
+
+/* Popup styling */
+#win95-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #C0C0C0;
+    border: 3px solid #000;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 16px;
+    color: #000;
+    box-shadow: 5px 5px #808080;
+    z-index: 1000;
+}
+
+#win95-popup .title-bar {
+    background-color: #000080;
+    color: #FFF;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#win95-popup .title-bar button {
+    background: #C0C0C0;
+    border: none;
+    padding: 0 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #000;
+    transition: background 0.3s;
+}
+
+#win95-popup .title-bar button:hover {
+    background: #FF0000;
+    color: #FFF;
+}
+
+#win95-popup .content {
+    padding: 15px;
+}
+
+#bug {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    animation: crawl 3s linear infinite;
+}
+
+/* keyframes for a bug crawling animation */
+@keyframes crawl {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(200px, 100px) rotate(45deg); }
+    50% { transform: translate(400px, -100px) rotate(90deg); }
+    75% { transform: translate(600px, 200px) rotate(135deg); }
+    100% { transform: translate(800px, 0) rotate(180deg); }
+}
